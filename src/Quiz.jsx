@@ -5,15 +5,16 @@ import { resultInitialState } from './constants';
 
 const Quiz = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [answerIndex, setAnswerIndex] = useState(null);
+  // const [answerIndex, setAnswerIndex] = useState(null);
   const [answer, setAnswer] = useState(null);
   const [result, setResult] = useState(resultInitialState);
   const [showResult, setShowResult] = useState(false);
+  const [yearGuess, setYearGuess] = useState('')
 
-  const { question, choices, correctAnswer } = questions[currentQuestion]
+  const { question, correctAnswer } = questions[currentQuestion]
 
   const onAnswerClick = (answer, index) => {
-    setAnswerIndex(index);
+    // setAnswerIndex(index);
     if(answer === correctAnswer) {
       setAnswer(true);
     } else {
@@ -22,7 +23,10 @@ const Quiz = ({ questions }) => {
   };
 
   const onClickNext = () => {
-    setAnswerIndex(null);
+    console.log(yearGuess);
+    console.log(correctAnswer)
+    // setAnswerIndex(null);
+    onAnswerClick(yearGuess, 0);
     setResult((prev) =>
       answer
        ? {
@@ -34,6 +38,7 @@ const Quiz = ({ questions }) => {
           wrongAnswers: prev.wrongAnswers + 1
        }
     );
+    setYearGuess('');
 
     if(currentQuestion !== questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
@@ -48,13 +53,22 @@ const Quiz = ({ questions }) => {
     setShowResult(false)
   };
 
+  const handleInputChange = (e) => { // Add this function to handle input changes
+    setYearGuess(e.target.value);
+  }
+
   return (
     <div className="quiz-container">
       {!showResult ? (<>
-        <span className="active-question-no">{currentQuestion + 1}</span>
-        <span className="total-question">/{questions.length}</span>
+        <span className="when-question">What year did this happen?</span>
         <h2>{question}</h2>
-        <ul>
+        <input
+          className="year-guess"
+          placeholder="Guess a year..."
+          value={yearGuess}
+          onChange={handleInputChange}
+          />
+        {/* <ul>
           {
             choices.map((answer, index) => (
               <li
@@ -65,9 +79,9 @@ const Quiz = ({ questions }) => {
                   {answer}
               </li>
             ))}
-        </ul>
+        </ul> */}
         <div className="footer">
-              <button onClick={onClickNext} disabled={answerIndex === null}>
+              <button onClick={onClickNext}>
                 {currentQuestion === questions.length - 1 ? "Finish" : "Next"}
               </button>
         </div>

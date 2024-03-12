@@ -1,45 +1,39 @@
 export const jsQuiz = [
     {
       question:
-        "Which of the following is used in React.js to increase performance?",
+        "The earliest existing record of a telescope",
       choices: [
-        "Virtual DOM",
-        "Original DOM",
-        "Both A and B",
-        "None of the above",
+        "1608",
+        "1708",
       ],
-      correctAnswer: "Virtual DOM",
+      correctAnswer: "1608",
     },
     {
-      question: "What is ReactJS?",
+      question: "The tin can telephone is devised",
       choices: [
-        "Server-side framework",
-        "User Interface framework",
-        "both a and b",
-        "None of the above",
+        "1667",
+        "1767",
       ],
-      correctAnswer: "User Interface framework",
+      correctAnswer: "1667",
     },
     {
       question:
-        "Identify the one which is used to pass data to components from outside",
-      choices: ["Render with arguments", "setState", "PropTypes", "props"],
-      correctAnswer: "props",
+        "The first known reference to baseball",
+      choices: ["1744", "1844"],
+      correctAnswer: "1744",
     },
     {
-      question: "In which language is React.js written?",
-      choices: ["Python", "Java", "C#", "JavaScript"],
-      correctAnswer: "JavaScript",
+      question: "The invention of the first vaccine",
+      choices: ["1798", "1698",],
+      correctAnswer: "1798",
     },
     {
-      question: "What is Babel?",
+      question: "The first incandescent light bulb",
       choices: [
-        "JavaScript interpreter",
-        "JavaScript transpiler",
-        "JavaScript compiler",
-        "None of the above",
+        "1802",
+        "1902",
       ],
-      correctAnswer: "JavaScript compiler",
+      correctAnswer: "1802",
     },
   ];
 
