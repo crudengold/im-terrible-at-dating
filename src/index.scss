@@ -24,13 +24,7 @@ body {
   padding: 30px 60px;
   box-sizing: border-box;
 
-  .active-question-no {
-    font-size: 32px;
-    font-weight: 500;
-    color: $primary;
-  }
-
-  .total-question {
+  .when-question {
     font-size: 16px;
     font-weight: 500;
     color: $disabled;
@@ -40,6 +34,22 @@ body {
     font-size: 20px;
     font-weight: 500;
     margin: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .test-text {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 20px; /* This makes the input field rounded */
+    font-size: 16px;
+    color: #333;
+  }
+
+  .test-text::placeholder {
+    color: #aaa; /* This is the color of the placeholder text */
+    opacity: 1; /* This is necessary to show the color in some browsers */
   }
 
   ul {

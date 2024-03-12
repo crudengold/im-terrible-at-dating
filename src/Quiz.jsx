@@ -51,10 +51,11 @@ const Quiz = ({ questions }) => {
   return (
     <div className="quiz-container">
       {!showResult ? (<>
-        <span className="active-question-no">{currentQuestion + 1}</span>
-        <span className="total-question">/{questions.length}</span>
+        <span className="when-question">What year did this happen?</span>
+
         <h2>{question}</h2>
-        <ul>
+        <input className="test-text" placeholder="Guess a year..."/>
+        {/* <ul>
           {
             choices.map((answer, index) => (
               <li
@@ -65,7 +66,7 @@ const Quiz = ({ questions }) => {
                   {answer}
               </li>
             ))}
-        </ul>
+        </ul> */}
         <div className="footer">
               <button onClick={onClickNext} disabled={answerIndex === null}>
                 {currentQuestion === questions.length - 1 ? "Finish" : "Next"}
