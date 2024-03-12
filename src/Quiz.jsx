@@ -22,20 +22,25 @@ const Quiz = ({ questions }) => {
     }
   };
 
+  const calculateDifference = (yearGuess, correctAnswer) => {
+    return Math.abs(yearGuess - correctAnswer);
+  }
+
   const onClickNext = () => {
     console.log(yearGuess);
     console.log(correctAnswer)
+    console.log(calculateDifference(yearGuess, correctAnswer))
     // setAnswerIndex(null);
     onAnswerClick(yearGuess, 0);
     setResult((prev) =>
       answer
        ? {
           ...prev,
-          score: prev.score + 5,
-          correctAnswers: prev.correctAnswers + 1,
+          score: prev.score + calculateDifference(yearGuess, correctAnswer),
+          bangOnAnswers: prev.bangOnAnswers + 1,
        } : {
           ...prev,
-          wrongAnswers: prev.wrongAnswers + 1
+          score: prev.score + calculateDifference(yearGuess, correctAnswer),
        }
     );
     setYearGuess('');
@@ -88,16 +93,10 @@ const Quiz = ({ questions }) => {
       </>) : <div className="result">
         <h3>Result</h3>
         <p>
-          Total Questions: <span>{questions.length}</span>
-        </p>
-        <p>
           Total Score: <span>{result.score}</span>
         </p>
         <p>
-          Correct Answers: <span>{result.correctAnswers}</span>
-        </p>
-        <p>
-          Wrong Answers: <span>{result.wrongAnswers}</span>
+          Bang On Answers: <span>{result.bangOnAnswers}</span>
         </p>
         <button onClick={onTryAgain}>Try again</button>
         </div>}
