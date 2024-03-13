@@ -10,10 +10,11 @@ const Quiz = ({ questions }) => {
   const [result, setResult] = useState(resultInitialState);
   const [showResult, setShowResult] = useState(false);
   const [yearGuess, setYearGuess] = useState('')
+  const [showAnswer, setShowAnswer] = useState(false);
 
   const { question, correctAnswer } = questions[currentQuestion]
 
-  const onAnswerClick = (answer, index) => {
+  const onAnswerClick = (answer) => {
     // setAnswerIndex(index);
     if(answer === correctAnswer) {
       setAnswer(true);
@@ -26,12 +27,9 @@ const Quiz = ({ questions }) => {
     return Math.abs(yearGuess - correctAnswer);
   }
 
-  const onClickNext = () => {
-    console.log(yearGuess);
-    console.log(correctAnswer)
-    console.log(calculateDifference(yearGuess, correctAnswer))
-    // setAnswerIndex(null);
-    onAnswerClick(yearGuess, 0);
+  const onClickGuess = () => {
+    onAnswerClick(yearGuess);
+    setShowAnswer(true);
     setResult((prev) =>
       answer
        ? {
@@ -43,10 +41,15 @@ const Quiz = ({ questions }) => {
           score: prev.score + calculateDifference(yearGuess, correctAnswer),
        }
     );
-    setYearGuess('');
+  }
 
+  const onClickNext = () => {
+    // setAnswerIndex(null);
+    setShowAnswer(false);
+    setYearGuess('');
     if(currentQuestion !== questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
+      console.log(result)
     } else {
       setCurrentQuestion(0);
       setShowResult(true);
@@ -58,7 +61,7 @@ const Quiz = ({ questions }) => {
     setShowResult(false)
   };
 
-  const handleInputChange = (e) => { // Add this function to handle input changes
+  const handleInputChange = (e) => {
     setYearGuess(e.target.value);
   }
 
@@ -72,23 +75,21 @@ const Quiz = ({ questions }) => {
           placeholder="Guess a year..."
           value={yearGuess}
           onChange={handleInputChange}
+          disabled={showAnswer}
           />
-        {/* <ul>
-          {
-            choices.map((answer, index) => (
-              <li
-                onClick={() => onAnswerClick(answer, index)}
-                key={answer}
-                className={answerIndex === index ? "selected-answer" : null}
-                >
-                  {answer}
-              </li>
-            ))}
-        </ul> */}
+        {showAnswer && (
+        <div>
+          <p>Correct answer: {correctAnswer}</p>
+          <p>Your score: {result.score}</p>
+        </div>
+        )}
         <div className="footer">
-              <button onClick={onClickNext}>
-                {currentQuestion === questions.length - 1 ? "Finish" : "Next"}
-              </button>
+          <button onClick={onClickGuess} style={{display: !showAnswer ? "" : "none"}}>
+            Guess
+          </button>
+          <button onClick={onClickNext} style={{display: showAnswer ? "" : "none"}}>
+            Next
+          </button>
         </div>
       </>) : <div className="result">
         <h3>Result</h3>
