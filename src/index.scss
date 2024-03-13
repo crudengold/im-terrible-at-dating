@@ -1,5 +1,5 @@
-$primary: #150080;
-$accent: #d08642;
+$primary: #63b3d4;
+$accent: #e50e1a;
 $bg: #ffffff;
 $bg-accent: #e7e8e9;
 $disabled: #9c9c9c;
@@ -7,7 +7,7 @@ $foreground: #2d264b;
 
 body {
   font-family: monospace;
-  background: linear-gradient(0deg, $primary 0.03%, $accent);
+  background: $accent;
   color: $foreground;
   display: flex;
   justify-content: center;
@@ -17,7 +17,7 @@ body {
 }
 
 .quiz-container {
-  width: 500px;
+  width: 50vh;
   background: $bg;
   border-radius: 4px;
   margin-top: 100px;
@@ -43,7 +43,7 @@ body {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 20px;
-    font-size: 32px;
+    font-size: 15px;
     color: #333;
     display: block;
     margin: auto;
@@ -85,7 +85,7 @@ body {
   }
 
   button {
-    background: linear-gradient(0deg, $primary 0.03%, $accent);
+    background: $primary;
     border-radius: 9px;
     font-size: 18px;
     color: $bg;
