@@ -17,11 +17,8 @@ const Quiz = ({ questions }) => {
   const onAnswerClick = (answer) => {
     // setAnswerIndex(index);
     if(answer === correctAnswer) {
-      console.log(answer, correctAnswer)
-      console.log('correct');
       setAnswer(true);
     } else {
-      console.log('wrong');
       setAnswer(false);
     }
   };
@@ -44,7 +41,6 @@ const Quiz = ({ questions }) => {
           score: prev.score + calculateDifference(yearGuess, correctAnswer),
        }
     );
-    console.log(result);
   }
 
   const onClickNext = () => {
@@ -53,16 +49,11 @@ const Quiz = ({ questions }) => {
     setYearGuess('');
     if(currentQuestion !== questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
+      console.log(result)
     } else {
       setCurrentQuestion(0);
       setShowResult(true);
     }
-
-
-    // if (showAnswer) {
-    // } else {
-    //     // If the answer is not currently being shown, show it
-    //  }
   };
 
   const onTryAgain = () => {
