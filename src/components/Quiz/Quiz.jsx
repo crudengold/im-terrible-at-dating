@@ -15,12 +15,13 @@ const Quiz = ({ questions }) => {
   const [showAnswer, setShowAnswer] = useState(false);
   const [showTimer, setShowTimer] = useState(true);
 
-  const { question, correctAnswer } = questions[currentQuestion]
+  const { question, correctAnswer, guesses } = questions[currentQuestion]
 
   const onAnswerClick = (answer) => {
     // setAnswerIndex(index);
     if(answer === correctAnswer) {
       setAnswer(true);
+      console.log('bang on!')
     } else {
       setAnswer(false);
     }
@@ -31,6 +32,7 @@ const Quiz = ({ questions }) => {
   }
 
   const onClickGuess = (finalAnswer) => {
+    guesses.push(yearGuess);
     onAnswerClick(yearGuess);
     setShowAnswer(true);
     setResult((prev) =>
@@ -53,7 +55,7 @@ const Quiz = ({ questions }) => {
     setShowTimer(false);
     if(currentQuestion !== questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
-      console.log(result)
+      // console.log(result)
     } else {
       setCurrentQuestion(0);
       setShowResult(true);

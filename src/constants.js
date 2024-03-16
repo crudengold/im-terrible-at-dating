@@ -2,11 +2,12 @@ export const jsQuiz = [
     {
       question:
         "The earliest existing record of a telescope",
-      choices: [
+      type: [
         "1608",
         "1708",
       ],
       correctAnswer: "1608",
+      guesses: [],
     },
     {
       question: "The tin can telephone is devised",
@@ -15,17 +16,20 @@ export const jsQuiz = [
         "1767",
       ],
       correctAnswer: "1667",
+      guesses: [],
     },
     {
       question:
         "The first known reference to baseball",
       choices: ["1744", "1844"],
       correctAnswer: "1744",
+      guesses: [],
     },
     {
       question: "The invention of the first vaccine",
       choices: ["1798", "1698",],
       correctAnswer: "1798",
+      guesses: [],
     },
     {
       question: "The first incandescent light bulb",
@@ -34,6 +38,7 @@ export const jsQuiz = [
         "1902",
       ],
       correctAnswer: "1802",
+      guesses: [],
     },
   ];
 
