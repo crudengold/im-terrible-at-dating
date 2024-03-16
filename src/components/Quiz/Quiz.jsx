@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 
 import { useState } from 'react';
-import { resultInitialState } from './constants';
+import { resultInitialState } from '../../constants';
+import "./Quiz.scss";
+import AnswerTimer from '../AnswerTimer/AnswerTimer';
 
 const Quiz = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -11,13 +13,15 @@ const Quiz = ({ questions }) => {
   const [showResult, setShowResult] = useState(false);
   const [yearGuess, setYearGuess] = useState('')
   const [showAnswer, setShowAnswer] = useState(false);
+  const [showTimer, setShowTimer] = useState(true);
 
-  const { question, correctAnswer } = questions[currentQuestion]
+  const { question, correctAnswer, guesses } = questions[currentQuestion]
 
   const onAnswerClick = (answer) => {
     // setAnswerIndex(index);
     if(answer === correctAnswer) {
       setAnswer(true);
+      console.log('bang on!')
     } else {
       setAnswer(false);
     }
@@ -27,11 +31,12 @@ const Quiz = ({ questions }) => {
     return Math.abs(yearGuess - correctAnswer);
   }
 
-  const onClickGuess = () => {
+  const onClickGuess = (finalAnswer) => {
+    guesses.push(yearGuess);
     onAnswerClick(yearGuess);
     setShowAnswer(true);
     setResult((prev) =>
-      answer
+      finalAnswer
        ? {
           ...prev,
           score: prev.score + calculateDifference(yearGuess, correctAnswer),
@@ -47,13 +52,17 @@ const Quiz = ({ questions }) => {
     // setAnswerIndex(null);
     setShowAnswer(false);
     setYearGuess('');
+    setShowTimer(false);
     if(currentQuestion !== questions.length - 1) {
       setCurrentQuestion((prev) => prev + 1);
-      console.log(result)
+      // console.log(result)
     } else {
       setCurrentQuestion(0);
       setShowResult(true);
     }
+    setTimeout(() => {
+      setShowTimer(true);
+    });
   };
 
   const onTryAgain = () => {
@@ -65,9 +74,16 @@ const Quiz = ({ questions }) => {
     setYearGuess(e.target.value);
   }
 
+  const handleTimeUp = () => {
+    setAnswer(false);
+    setShowAnswer(true);
+    onClickGuess(false);
+  };
+
   return (
     <div className="quiz-container">
       {!showResult ? (<>
+        {showTimer && <AnswerTimer duration={10} onTimeUp={handleTimeUp}/>}
         <span className="when-question">What year did this happen?</span>
         <h2>{question}</h2>
         <input
@@ -84,7 +100,7 @@ const Quiz = ({ questions }) => {
         </div>
         )}
         <div className="footer">
-          <button onClick={onClickGuess} style={{display: !showAnswer ? "" : "none"}}>
+          <button onClick={() => onClickGuess(answer)} style={{display: !showAnswer ? "" : "none"}}>
             Guess
           </button>
           <button onClick={onClickNext} style={{display: showAnswer ? "" : "none"}}>
