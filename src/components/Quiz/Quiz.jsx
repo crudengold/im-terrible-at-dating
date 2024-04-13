@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { resultInitialState } from '../../constants';
 import "./Quiz.scss";
 import AnswerTimer from '../AnswerTimer/AnswerTimer';
+import Result from '../Result/Result';
+
 
 const Quiz = ({ questions }) => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -15,7 +17,7 @@ const Quiz = ({ questions }) => {
   const [showAnswer, setShowAnswer] = useState(false);
   const [showTimer, setShowTimer] = useState(true);
 
-  const { question, correctAnswer, guesses } = questions[currentQuestion]
+  const { question, correctAnswer } = questions[currentQuestion]
 
   const onAnswerClick = (answer) => {
     // setAnswerIndex(index);
@@ -31,8 +33,8 @@ const Quiz = ({ questions }) => {
     return Math.abs(yearGuess - correctAnswer);
   }
 
+
   const onClickGuess = (finalAnswer) => {
-    guesses.push(yearGuess);
     onAnswerClick(yearGuess);
     setShowAnswer(true);
     setResult((prev) =>
@@ -107,17 +109,13 @@ const Quiz = ({ questions }) => {
             Next
           </button>
         </div>
-      </>) : <div className="result">
-        <h3>Result</h3>
-        <p>
-          Total Score: <span>{result.score}</span>
-        </p>
-        <p>
-          Bang On Answers: <span>{result.bangOnAnswers}</span>
-        </p>
-        <button onClick={onTryAgain}>Try again</button>
-        </div>}
-
+      </>) : (
+        <Result
+          result={result.score}
+          onTryAgain={onTryAgain}
+          bangOnAnswers={result.bangOnAnswers}
+        />
+      )}
     </div>
   );
 };
