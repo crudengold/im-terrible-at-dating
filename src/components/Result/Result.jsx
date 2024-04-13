@@ -21,8 +21,8 @@ const Result = ({result, onTryAgain, bangOnAnswers}) => {
 
       console.log(score);
 
-      const newHighScores = [...highScores, score]
-      newHighScores.count !== 1 ? newHighScores.sort((a, b) => a.score - b.score) : newHighScores;
+      var newHighScores = [...highScores, score]
+      newHighScores.length !== 1 ? newHighScores = newHighScores.sort((a, b) => a.score - b.score) : newHighScores;
       setHighScores(newHighScores);
       setShowScores(true);
       localStorage.setItem("highScores", JSON.stringify(newHighScores));
